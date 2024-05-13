@@ -10,7 +10,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -26,14 +25,10 @@
             Text="Add Row" 
             Clicked="Button_Clicked"/>
 
-        <local:NewContent1 
-            Grid.Row="2" />
-
         <ListView 
-            Grid.Row="3"  BackgroundColor="White"
+            Grid.Row="2"  BackgroundColor="White"
             IsVisible="{Binding Path=Show_IsChecked}"                                     
             ItemsSource="{Binding Path=ListView_Items}" />
-
 
     </Grid>
 
