@@ -1,25 +1,46 @@
-﻿namespace ListViewBugDemo
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+
+namespace ListViewBugDemo;
+
+public partial class MainPage : ContentPage, INotifyPropertyChanged
 {
-    public partial class MainPage : ContentPage
+    public MainPage()
     {
-        int count = 0;
+        InitializeComponent();
+        BindingContext = this;
+    }
 
-        public MainPage()
+    int count = 1;
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        count++;
+        ListView_Items.Add(count.ToString());
+    }
+
+    private bool _Show_IsChecked = false;
+    public bool Show_IsChecked
+    {
+        get
         {
-            InitializeComponent();
+            return _Show_IsChecked;
         }
-
-        private void OnCounterClicked(object sender, EventArgs e)
+        set
         {
-            count++;
+            _Show_IsChecked = value;
+            OnPropertyChanged(nameof(Show_IsChecked));
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            ListView_Items.Add("-- First Row --");
         }
     }
+
+    public int Label_Text
+    {
+        get
+        {
+            return ListView_Items.Count;
+        }
+    }
+    public ObservableCollection<string> ListView_Items { get; set; } = new ObservableCollection<string>();
 
 }
